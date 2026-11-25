@@ -93,8 +93,6 @@ Some texts had no script; I collected them by hand:
 
 ## What the dataset does not reproduce
 
-- The post gives 0.588 for the June 2006 Bear Stearns dividend release; the saved score is 0.58746, which rounds to
-  0.587.
 - The post's 628 windows include withheld texts. From the released texts the count is 384, and the 27 hot windows are
   all in released texts.
 - Fakespot, Desklib and Fast-DetectGPT's false positives on the 118 human texts, and EditLens on the 118 pairs, are

@@ -14,8 +14,25 @@ SENTENCE_END = re.compile(r"[.!?](?=\s|$)")
 
 
 class _Text(HTMLParser):
-    BLOCK = {"p", "br", "div", "tr", "li", "h1", "h2", "h3", "h4", "h5", "table", "td", "ul", "ol", "dd", "dt"}
-    BLOCK |= {"blockquote"}
+    BLOCK = {
+        "p",
+        "br",
+        "div",
+        "tr",
+        "li",
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "table",
+        "td",
+        "ul",
+        "ol",
+        "dd",
+        "dt",
+        "blockquote",
+    }
     HIDDEN = {"script", "style", "noscript"}
 
     def __init__(self):
