@@ -1,0 +1,74 @@
+The search
+  human scans: 500
+  words in them: 253,098
+  years of the sources: 1902-2020
+  human scans called AI: 13
+  human scans at 75% AI or more: 4
+First guesses and the AI check
+  AI texts written by Qwen3-14B: 118
+  of them called AI: 118
+  human texts they match: 118
+  human texts called AI: 0
+  guessed predictable genres scanned: 26
+  of them called human: 26
+  warmest sentence in the first two guesses: 0.83 (Return on average common equity was 25.8% for...)
+Essays
+  Liang et al.'s essays: 91
+  called AI now: 0
+  highest now: 0.089
+  ESL essays on TOEFL prompts from 2002: 105
+  of them called AI: 0
+  highest of them: 0.0002
+  called AI in 2023 (0.5 or more): 47
+  0.75 or more in 2023: 30
+Lehman Brothers
+  human texts at 1.0: 4
+  Lehman Q2 2007 cut: words, start: 322, Non-interest expenses
+  its score: 1.0
+  Lehman Q2 2008 hit: words, start: 301, Investment Banking reported net revenues
+  whole Q2 2007 page (970 words): 0.025
+  full Q2 2008 release text: words, score: 840, 0.056
+  Lehman scans: 185
+  of them called AI: 11
+  Q2 2008 cuts by starting sentence: 12
+  the two highest: 1.0, 0.59
+  the rest: 0.00015 to 0.14
+  the two 750+ word cuts: 0.056, 0.056
+Windows and the score cliff
+  'This increase was driven...' in three cuts: 0.006, 0.604, 0.644
+  full Q2 2008 release, sentence runs: 0.00-0.00; 0.98-0.99; 0.01-0.03
+  scans in the release (human, AI, edited): 637
+  of them between 0.663 and 0.9999: 0
+  expense-figure edit: sentence mean, score: 0.910, 0.61
+  ratio-figure edit: sentence mean, score: 0.935, 1.0
+Words or figures
+  wording edits: 3
+  their scores: 1.0, 1.0, 1.0
+  all of the previous quarter's figures: 0.22
+  small random changes to the figures: 0.1 to 0.55
+  previous quarter's release, as published: 0.045
+  with this quarter's figures: 0.32
+  only the ratio figures, only the capital figures: 1.0, 1.0
+Lehman's other quarters
+  Lehman quarters with the metrics section scanned: 38
+  quarters at 0.5+: ['Q2 2007']
+Hot windows
+  windows in released texts: 384
+  hot windows: 27
+  they come from: Bear Stearns dividend releases (3), Lehman Q2 2007 (19), Lehman Q2 2008 (5)
+  texts whose windows need the withheld text: 105
+Near misses
+  Bear Stearns dividend releases: words: 329 to 332
+  scores and labels: 0.498 ai, 0.587 ai, 0.313 human
+  regional bank sections of 750+ words scanned: 4
+  highest of them: 0.00027
+Second opinions
+  Pangram checks: 20
+  Pangram verdicts: {'Human': 20}
+  highest Pangram % AI: 0.0
+  free detectors: human texts: 388
+  GPTZero calls AI: 12
+  tropa-mini: flags, AUROC: 13%, 0.69
+  tabularisai: flags, AUROC: 5%, 0.76
+  tmr: flags, AUROC: 95%, 0.66
+  vanguard: flags, AUROC: 42%, 0.69
