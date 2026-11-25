@@ -1,11 +1,39 @@
 # Which Human Writing Does GPTZero Call AI?
 
+[![Post](https://img.shields.io/badge/post-spanthi.com-2b2b2b)][post]
+[![Dataset on Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20dataset-vein05%2Fgptzero--human--writing-ffcc4d)][dataset]
+[![Code: MIT](https://img.shields.io/badge/code-MIT-blue)](LICENSE)
+[![Data: CC BY 4.0](https://img.shields.io/badge/data-CC%20BY%204.0-lightgrey)](https://creativecommons.org/licenses/by/4.0/)
+
+![Which Human Writing Does GPTZero Call AI?](assets/banner.png)
+
 Code for my post [Which Human Writing Does GPTZero Call AI?][post]. I ran 500 scans of old human writing (1902-2020)
 through GPTZero 5.0b, looking for text it calls AI. Almost all of it came back human. The exception was two unchanged
 ~300-word cuts of Lehman Brothers earnings releases, which scored 100% AI.
 
 The scores are on [Hugging Face][dataset]. This repo recomputes the post from that dataset, and has the scripts I used
 to collect the texts, scan them and compare detectors.
+
+## What I found
+
+| | Result |
+| --- | --- |
+| Human scans (253,098 words, 1902-2020) | 500 scans, 13 called AI, 4 at 75% AI or more |
+| Lehman Q2 2007, 322-word cut | AI 100% (whole release: 0.025) |
+| Lehman Q2 2008, 301-word cut | AI 100% (whole release: 0.056) |
+| Liang et al.'s 91 TOEFL essays | 0 called AI (47 in 2023) |
+| 105 more ESL essays from 2002 | 0 called AI |
+| 118 AI texts from Qwen3-14B | 118 called AI |
+| Pangram 4.1 on GPTZero's 20 warmest texts | all 20 human |
+
+![Every scan, by kind of text](assets/central.png)
+
+Each dot is one scan. The red ones are the texts GPTZero called AI, and nearly all of them are Lehman releases.
+
+![Same release, different starting sentence](assets/start_bars.png)
+
+The same Q2 2008 release, cut at 14 different starting sentences. Only one cut scores 1.0, and both 750+ word cuts
+come out human. This is why a 750-word false positive was out of reach.
 
 ## Quick start
 
@@ -58,3 +86,15 @@ listed with their source, first and last words and a hash, so you can fetch them
 
 [post]: https://spanthi.com/blog/gptzero-human-writing/
 [dataset]: https://huggingface.co/datasets/vein05/gptzero-human-writing
+
+## Cite
+
+```bibtex
+@misc{panthi2026gptzero,
+  author       = {Panthi, Sugam},
+  title        = {Which Human Writing Does {GPTZero} Call {AI}?},
+  year         = {2026},
+  howpublished = {\url{https://spanthi.com/blog/gptzero-human-writing/}},
+  note         = {Code: \url{https://github.com/Vein05/gptzero-human-writing}. Data: \url{https://huggingface.co/datasets/vein05/gptzero-human-writing}}
+}
+```
