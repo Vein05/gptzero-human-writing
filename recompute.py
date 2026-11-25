@@ -1,14 +1,14 @@
 """Print every number in the post from the released data.
 
-    python3 recompute.py [DATA_FOLDER] [LIANG_GPTZERO_JSON]
+    python3 recompute.py [--data FOLDER] [--liang GPTZero.json]
 
-DATA_FOLDER holds the dataset's jsonl files (default: dataset/data, or $GPTZERO_HUMAN_DATA).
-LIANG_GPTZERO_JSON is GPTZero.json from Liang et al.'s repository; without it the two 2023 counts are skipped.
+--data is a local folder with the dataset's jsonl files (default: $GPTZERO_HUMAN_DATA, else the Hugging Face copy).
+--liang is GPTZero.json from Liang et al.'s repository; without it the two 2023 counts are skipped.
 """
 
+import argparse
 import json
 import re
-import sys
 from collections import Counter
 
 from dataset import (
@@ -303,11 +303,13 @@ def render(results):
 
 
 def main():
-    folder = sys.argv[1] if len(sys.argv) > 1 else DEFAULT
-    liang_file = sys.argv[2] if len(sys.argv) > 2 else None
-    print(render(compute(load(folder), liang_file)))
-    if not liang_file:
-        print("\n(2023 counts for Liang et al.'s essays need their GPTZero.json as the second argument.)")
+    ap = argparse.ArgumentParser(description="Print every number in the post from the released data.")
+    ap.add_argument("--data", default=DEFAULT, help="local data/ folder (default: the Hugging Face copy)")
+    ap.add_argument("--liang", help="Liang et al.'s GPTZero.json, for the two 2023 counts")
+    a = ap.parse_args()
+    print(render(compute(load(a.data), a.liang)))
+    if not a.liang:
+        print("\n(2023 counts for Liang et al.'s essays need their GPTZero.json: --liang GPTZero.json.)")
 
 
 if __name__ == "__main__":

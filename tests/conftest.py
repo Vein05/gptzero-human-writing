@@ -12,10 +12,10 @@ from dataset import DEFAULT, load  # noqa: E402
 
 @pytest.fixture(scope="session")
 def data():
-    folder = DEFAULT if DEFAULT.is_absolute() else ROOT / DEFAULT
-    if not (folder / "human_scans.jsonl").exists():
-        pytest.skip(f"dataset not found at {folder} (set GPTZERO_HUMAN_DATA)")
-    return load(folder)
+    try:
+        return load(DEFAULT)
+    except (OSError, ImportError) as e:
+        pytest.skip(f"dataset not available: {e}")
 
 
 @pytest.fixture(scope="session")

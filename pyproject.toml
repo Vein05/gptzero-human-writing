@@ -5,7 +5,7 @@ description = "Code for the post \"Which Human Writing Does GPTZero Call AI?\": 
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.11"
-dependencies = []
+dependencies = ["huggingface_hub>=0.23"]
 
 [project.optional-dependencies]
 figures = ["pillow>=10"]

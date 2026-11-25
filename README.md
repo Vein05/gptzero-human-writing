@@ -37,30 +37,33 @@ come out human. This is why a 750-word false positive was out of reach.
 
 ## Quick start
 
-All you need is Python 3.11+ and the dataset's `data/` folder:
+All you need is Python 3.11+ and `huggingface_hub`. The scripts load the data from [Hugging Face][dataset] on the
+first run and use the cached copy after that:
 
 ```
-python3 recompute.py path/to/data    # every number in the post
-python3 tables.py path/to/data       # Tables A1-A4
+python3 recompute.py    # every number in the post
+python3 tables.py       # Tables A1-A4
 ```
+
+To use a local copy of the dataset's `data/` folder instead, set `GPTZERO_HUMAN_DATA` to it.
 
 The figures need Pillow and the Source Serif 4 font (set `FIGURE_FONT` to the .ttf if it isn't found):
 
 ```
-uv run --extra figures python -m figures.make_figures out/ --data path/to/data --liang GPTZero.json
+uv run --extra figures python -m figures.make_figures out/ --liang GPTZero.json
 ```
 
 `GPTZero.json` is Liang et al.'s file with GPTZero's 2023 scores on their 91 TOEFL essays, from
 [their repo](https://github.com/Weixin-Liang/ChatGPT-Detector-Bias) (`Data_and_Results/Human_Data/TOEFL_real_91`).
-`recompute.py` takes it as an optional second argument for the two 2023 numbers.
+Pass it to `recompute.py` with `--liang GPTZero.json` for the two 2023 numbers.
 
-Tests: `GPTZERO_HUMAN_DATA=path/to/data uv run pytest`. Tests that need a missing file are skipped.
+Tests: `uv run pytest`. Tests that need a missing file are skipped.
 
 ## What's here
 
 - `scan/` sends texts to the GPTZero API and saves each raw response. Needs `GPTZERO_API_KEY`, and it spends credits.
 - `collect/` downloads the human texts (Wayback Machine, SEC EDGAR and a few other sites) and cuts them into whole
-  sentences. `python3 -m collect.check path/to/data` rebuilds texts from the download cache and checks them against the
+  sentences. `python3 -m collect.check` rebuilds texts from the download cache and checks them against the
   dataset's hashes.
 - `controls/` has the 118 AI texts I had Qwen3-14B write to match human ones, and the comparison with other detectors
   (Binoculars, Fast-DetectGPT, RADAR, Desklib, Fakespot, OpenAI's RoBERTa, EditLens). Needs a GPU.

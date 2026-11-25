@@ -5,7 +5,9 @@ import os
 import sys
 from pathlib import Path
 
-DEFAULT = Path(os.environ.get("GPTZERO_HUMAN_DATA", "dataset/data"))
+REPO = "vein05/gptzero-human-writing"
+# A local data/ folder to read instead of the Hugging Face copy.
+DEFAULT = os.environ.get("GPTZERO_HUMAN_DATA")
 FILES = (
     "human_scans",
     "edited_copies",
@@ -18,9 +20,16 @@ DETECTORS = ("tropa-mini", "tabularisai", "tmr", "vanguard")
 
 
 def load(folder=DEFAULT):
-    """Return {file name: list of rows} for the six dataset files."""
-    folder = Path(folder)
+    """Return {file name: list of rows} for the six dataset files, from Hugging Face unless a folder is given."""
+    folder = Path(folder) if folder else hub_folder()
     return {name: read_jsonl(folder / f"{name}.jsonl") for name in FILES}
+
+
+def hub_folder():
+    """Download the dataset's data/ folder from Hugging Face (cached after the first run) and return its path."""
+    from huggingface_hub import snapshot_download
+
+    return Path(snapshot_download(REPO, repo_type="dataset", allow_patterns="data/*")) / "data"
 
 
 def folder_from_argv():
